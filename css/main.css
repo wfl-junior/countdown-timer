@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f4f6;
+}
+
+.content {
+  display: flex;
+  gap: 6rem;
+}
+
+.section .title {
+  font-weight: 300;
+  font-size: 1.125rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #f43e5c;
+  margin-bottom: 1.75rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.cards {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  --border: 1px solid rgb(0 0 0 / 0.2);
+  --transition-timing: 300ms;
+
+  position: relative;
+  color: #e21d48;
+  font-weight: bold;
+  font-size: 6.5rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
+}
+
+.card :is(.top, .bottom, .top-flip, .bottom-flip) {
+  height: 0.75em;
+  line-height: 1;
+  padding: 0.25em;
+  overflow: hidden;
+}
+
+.card :is(.top, .top-flip) {
+  background-color: #f9fafb;
+  border-bottom: var(--border);
+}
+
+.card :is(.bottom, .bottom-flip) {
+  background-color: white;
+  border-top: var(--border);
+  display: flex;
+  align-items: flex-end;
+}
+
+.card :is(.top-flip, .bottom-flip) {
+  --perspective: 150px;
+
+  position: absolute;
+  z-index: 1;
+  inset-inline: 0;
+  transform-style: preserve-3d;
+}
+
+.card .top-flip {
+  top: 0;
+  transform: perspective(var(--perspective)) rotateX(0);
+  transform-origin: bottom;
+  animation: top-flip var(--transition-timing) ease-in;
+}
+
+.card .bottom-flip {
+  bottom: 0;
+  transform: perspective(var(--perspective)) rotateX(90deg);
+  transform-origin: top;
+  animation: bottom-flip var(--transition-timing) ease-out
+    var(--transition-timing);
+}
+
+@keyframes top-flip {
+  to {
+    transform: perspective(var(--perspective)) rotateX(90deg);
+  }
+}
+
+@keyframes bottom-flip {
+  to {
+    transform: perspective(var(--perspective)) rotateX(0);
+  }
+}
